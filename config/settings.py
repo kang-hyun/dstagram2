@@ -124,30 +124,36 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
 
 LOGIN_REDIRECT_URL = '/'
 
 DISQUS_WEBSITE_SHORTNAME = 'kangs-dstagram'
 SITE_ID = 1
 
+from .secret_keys import *
 AWS_ACCESS_KEY_ID = 'AKIAUTOFK3Q6ULMVQKNF'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_REGION = 'ap-northeast-2'
 AWS_STORAGE_BUCKET_NAME = 'kangs-dstagram2'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME,AWS_REGION)
+AWS_S3_FILE_OVERWRITE = False
 AWS_s3_OBJECT_PATAMETERS = {
     'CacheControl': 'max-age=86400'
 }
+AWS_DEFAULT_ACL = 'public-read'
+AWS_LOCATION = 'static'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'http://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATIC_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-DEFAULT_FILE_STORAGE = 'config.asset_storage.MediaStorage'
+DEFAULT_FILE_STORAGE = 'config.s3media.MediaStorage'
