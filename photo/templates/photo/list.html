@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-{% block title %}- List{% endblock %}
+{% block title %}
+    {{object.text|truncatechars:10}}
+{% endblock %}
 
 {% block content %}
     {% for post in photos %}
