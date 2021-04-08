@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os.path
+import os
 import dj_database_url
 import sys
 sys.modules['django.utils.six.moves.urllib.parse'] = __import__('six.moves.urllib_parse', fromlist=['urlencode'])
@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-8z1j=8l#nx6hcfox!qa5uoxzk34t*omqpk2!2c_m*c3g53*u07
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com]
 
 
 # Application definition
@@ -142,6 +142,7 @@ DISQUS_WEBSITE_SHORTNAME = 'kangs-dstagram'
 SITE_ID = 1
 
 from .secret_keys import *
+
 AWS_ACCESS_KEY_ID = 'AKIAUTOFK3Q6ULMVQKNF'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_REGION = 'ap-northeast-2'
@@ -157,6 +158,6 @@ AWS_LOCATION = 'static'
 STATIC_URL = 'http://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATIC_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_FILE_STORAGE = 'config.s3media.MediaStorage'
